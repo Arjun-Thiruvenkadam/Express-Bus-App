@@ -2,7 +2,7 @@
 
 ## Project Structure
 
-- access - Database access layer
-- models - Schema definition and model creation
+- models - Database access
+- schemas - Schema definition and model creation
 - routes - Api routes
 - services - Business logic
