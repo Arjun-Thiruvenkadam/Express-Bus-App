@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ticketController = require("../controllers/ticket");
+const ticketController = require("../services/ticket");
 
 //Update multiple tickets
 router.put("/update", ticketController.updateAll);

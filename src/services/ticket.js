@@ -1,4 +1,4 @@
-const ticketService = require("../services/ticketService");
+const ticketService = require("../access/ticketService");
 
 const updateAll = async (req, res) => {
   const selectedTickets = req.body;
@@ -37,7 +37,7 @@ const getTicketsWithStatus = async (req, res) => {
 };
 
 const clear = async (req, res) => {
-  const result = await ticketService.reset();
+  await ticketService.reset();
   res.send("Success");
 };
 
