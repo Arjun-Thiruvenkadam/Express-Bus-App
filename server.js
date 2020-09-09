@@ -1,17 +1,11 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
-
-const ticketRouter = require("./src/routes/ticket");
-const authRouter = require("./src/routes/auth");
+const ticketRouter = require("./routes/ticket");
+const authRouter = require("./routes/auth");
 require("dotenv").config();
-
-mongoose.connect(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+require("./utils/connection")();
 
 app.use(cors());
 app.use(express.json());

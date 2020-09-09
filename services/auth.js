@@ -1,4 +1,4 @@
-const authService = require("../access/authService");
+const authService = require("../models/authModel");
 
 const auth = (req, res) => {
   const authPayload = req.body;
