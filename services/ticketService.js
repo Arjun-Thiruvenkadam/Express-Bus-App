@@ -1,4 +1,4 @@
-const ticketService = require("../models/ticketService");
+const ticketService = require("../models/ticketModel");
 
 const updateAll = async (req, res) => {
   const selectedTickets = req.body;

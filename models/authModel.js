@@ -1,4 +1,4 @@
-const { User } = require("../schemas/user");
+const { User } = require("../schemas/userSchema");
 
 const getUser = (email) => {
   const user = User.find({ mail: email });

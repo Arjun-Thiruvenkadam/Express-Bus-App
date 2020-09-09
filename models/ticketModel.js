@@ -1,4 +1,4 @@
-const { Ticket } = require("../schemas/ticket");
+const { Ticket } = require("../schemas/ticketSchema");
 
 const createRes = (id, flag) => {
   const updateStatus = {
