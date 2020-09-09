@@ -1,23 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const ticketController = require("../services/ticketService");
+const ticketService = require("../services/ticketService");
 
-//Update multiple tickets
-router.put("/update", ticketController.updateAll);
+router.put("/update", async (req, res) => {
+  const selectedTickets = req.body;
+  const result = await ticketService.updateAll(selectedTickets);
+  return res.send(result);
+});
 
-//Clear all tickets
-router.put("/clear", ticketController.clear);
+router.put("/reset", async (req, res) => {
+  const result = await ticketService.clear();
+  return res.send(result + " Modified");
+});
 
-//View all tickets
-router.get("/", ticketController.getAll);
+router.get("/", async (req, res) => {
+  const tickets = await ticketService.getAll();
+  return res.send(tickets);
+});
 
-//Update ticket status(open/close + adding user details)
-router.put("/:id", ticketController.updateStatus);
+router.put("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) return res.send("Check URL or ticket id");
+  const userId = req.query.userId;
+  const result = await ticketService.updateStatus(id, userId);
+  return res.send(result);
+});
 
-//View ticket status
-router.get("/:id", ticketController.getTicket);
+router.get("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) return res.send("Check URL or ticket id");
+  const ticket = await ticketService.getTicket(id);
+  return res.send(ticket);
+});
 
-//View ticket Status
-router.get("/status/:stat", ticketController.getTicketsWithStatus);
+router.get("/status/:stat", async (req, res) => {
+  const stat = req.params.stat;
+  const tickets = await ticketService.getTicketsWithStatus(stat);
+  return res.send(tickets);
+});
 
 module.exports = router;

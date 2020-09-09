@@ -1,24 +1,23 @@
 const authService = require("../models/authModel");
 
-const auth = (req, res) => {
-  const authPayload = req.body;
+const auth = (authPayload) => {
   if (!authPayload.login) {
-    signUp(authPayload, res);
+    return signUp(authPayload);
   } else {
-    login(authPayload, res);
+    return login(authPayload);
   }
 };
 
-const signUp = async (authPayload, res) => {
+const signUp = async (authPayload) => {
   const result = await authService.getUser(authPayload.email);
-  if (result.length > 0) res.send("Email already registered");
+  if (result.length > 0) return "Email already registered";
   const user = getSignUpPayload(authPayload);
   const newUser = await authService.createUser(user);
   const payload = {
     name: newUser.userName,
     token: newUser._id,
   };
-  res.send(payload);
+  return payload;
 };
 
 const getSignUpPayload = (authPayload) => {
@@ -30,7 +29,7 @@ const getSignUpPayload = (authPayload) => {
   return user;
 };
 
-const login = async (authPayload, res) => {
+const login = async (authPayload) => {
   const user = {
     mail: authPayload.email,
     password: authPayload.password,
@@ -41,9 +40,9 @@ const login = async (authPayload, res) => {
       token: verifiedUser[0]._id,
       name: verifiedUser[0].userName,
     };
-    return res.send(payload);
+    return payload;
   } else {
-    return res.send("false");
+    return "false";
   }
 };
 

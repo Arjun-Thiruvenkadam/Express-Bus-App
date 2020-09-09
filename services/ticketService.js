@@ -1,44 +1,38 @@
 const ticketService = require("../models/ticketModel");
 
-const updateAll = async (req, res) => {
-  const selectedTickets = req.body;
+const updateAll = async (selectedTickets) => {
   const result = await ticketService.updateTickets(selectedTickets);
-  return res.send(result);
+  return result;
 };
 
-const getAll = async (req, res) => {
+const getAll = async () => {
   const tickets = await ticketService.getAll();
-  return res.send(tickets);
+  return tickets;
 };
 
-const updateStatus = async (req, res) => {
-  const id = parseInt(req.params.id);
-  const userId = req.query.userId;
-  if (!userId) return res.send("User id not given");
+const updateStatus = async (id, userId) => {
+  if (!userId) return "User id not given";
   if (id < 1 || id > 40)
-    return res.send("There is no ticket with the given id");
-
+    return "There is no ticket with the given id";
   const result = await ticketService.updateStatus(id, userId);
-  return res.send(result);
+  return result;
 };
 
-const getTicket = async (req, res) => {
-  const id = parseInt(req.params.id);
+const getTicket = async (id) => {
   if (id < 1 || id > 40)
-    return res.send("There is no ticket with the given id");
+    return "There is no ticket with the given id";
   const ticket = await ticketService.getTicket(id);
-  return res.send(ticket);
+  return ticket;
 };
 
-const getTicketsWithStatus = async (req, res) => {
-  const stat = req.params.stat;
+const getTicketsWithStatus = async (stat) => {
   const tickets = await ticketService.getTicketsWithStatus(stat);
-  return res.send(tickets);
+  return tickets;
 };
 
-const clear = async (req, res) => {
-  await ticketService.reset();
-  res.send("Success");
+const clear = async () => {
+  const result = await ticketService.reset();
+  return result.nModified;
 };
 
 module.exports = {
