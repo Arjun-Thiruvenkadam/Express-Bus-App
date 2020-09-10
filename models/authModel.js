@@ -10,8 +10,8 @@ const createUser = async (user) => {
   return newUser;
 };
 
-const getVerifiedUser = (user) => {
-  const verUser = User.find(user);
+const getVerifiedUser = (mail,password) => {
+  const verUser = User.find({mail:mail, password:password});
   return verUser;
 };
 
