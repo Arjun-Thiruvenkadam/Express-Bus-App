@@ -1,11 +1,19 @@
 const authService = require("../models/authModel");
 
+//helper
 const getSignUpPayload = (authPayload) => {
   const user = {
     userName: authPayload.userName,
     mail: authPayload.mail,
     password: authPayload.password,
   };
+  return user;
+};
+
+//helper
+const getUser = async (personId) => {
+  const user = await authService.getUserWithId(personId);
+  if (!user) return "No User Available with the given id";
   return user;
 };
 
@@ -21,9 +29,11 @@ const signUp = async (authPayload) => {
   return payload;
 };
 
-
 const login = async (authPayload) => {
-  const verifiedUser = await authService.getVerifiedUser(authPayload.email, authPayload.password);
+  const verifiedUser = await authService.getVerifiedUser(
+    authPayload.email,
+    authPayload.password
+  );
   if (verifiedUser.length > 0) {
     const payload = {
       token: verifiedUser[0]._id,
@@ -37,5 +47,6 @@ const login = async (authPayload) => {
 
 module.exports = {
   signUp,
-  login
+  login,
+  getUser,
 };

@@ -1,4 +1,5 @@
 const { Ticket } = require("../schemas/ticketSchema");
+const { getUser } = require("../services/authService");
 
 const createRes = (id, flag) => {
   const updateStatus = {
@@ -8,16 +9,25 @@ const createRes = (id, flag) => {
   return updateStatus;
 };
 
-const updateTickets = async (selectedTickets) => {
+const validatePersonId = async (personId) => {
+  const user = await getUser(personId);
+  if (user == "Invalid Id") return false;
+  if (user == "No User Available with the given id") return false;
+  return true;
+};
+
+const updateTickets = async (Tickets) => {
   const result = [];
-  for (const ticketIndex in selectedTickets) {
-    const ticketObj = selectedTickets[ticketIndex];
-    const res = await Ticket.updateOne(
-      { ticketId: ticketObj.ticketId, status: "open" },
-      { status: "closed", personId: ticketObj.personId }
-    );
-    if (res.nModified == 1) result.push(createRes(ticketObj.ticketId, true));
-    else result.push(createRes(ticketObj.ticketId, false));
+  for (const ticketIndex in Tickets) {
+    const ticket = Tickets[ticketIndex];
+    if (await validatePersonId(ticket.personId)) {
+      const res = await Ticket.updateOne(
+        { ticketId: ticket.ticketId, status: "open" },
+        { status: "closed", personId: ticket.personId }
+      );
+      if (res.nModified == 1) result.push(createRes(ticket.ticketId, true));
+      else result.push(createRes(ticket.ticketId, false));
+    } else result.push(createRes(ticket.ticketId, false));
   }
   return result;
 };
@@ -28,12 +38,15 @@ const getAll = () => {
 };
 
 const updateStatus = async (id, userId) => {
-  const result = await Ticket.updateOne(
-    { ticketId: id, status: "open" },
-    { status: "closed", personId: userId }
-  );
-  if (result.nModified == 1) return "Success";
-  return "Already Booked";
+  if (await validatePersonId(userId)) {
+    const result = await Ticket.updateOne(
+      { ticketId: id, status: "open" },
+      { status: "closed", personId: userId }
+    );
+    if (result.nModified == 1) return "Success";
+    return "Already Booked";
+  }
+  else return "Check User Id";
 };
 
 const getTicket = (id) => {

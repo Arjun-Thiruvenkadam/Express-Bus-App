@@ -14,4 +14,10 @@ router.get("/login", async (req, res) => {
   return res.send(result);
 });
 
+router.get("/:userId", async (req, res) => {
+  const personId = req.params.userId;
+  const user = await authController.getUser(personId);
+  return res.send(user);
+});
+
 module.exports = router;
