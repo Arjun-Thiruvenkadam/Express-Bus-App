@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return res.send("Check URL or ticket id");
-  const userId = req.query.userId;
+  const userId = req.body.userId;
   const result = await ticketService.updateStatus(id, userId);
   return res.send(result);
 });
