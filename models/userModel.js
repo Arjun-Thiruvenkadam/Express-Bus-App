@@ -1,7 +1,7 @@
 const { User } = require("../schemas/userSchema");
 
 const getUser = (mail) => {
-  const user = User.find({ mail });
+  const user = User.findOne({ mail });
   return user;
 };
 
@@ -11,20 +11,20 @@ const createUser = async (user) => {
 };
 
 const getVerifiedUser = (mail, password) => {
-  const verUser = User.find({ mail, password });
-  return verUser;
+  const verifiedUser = User.find({ mail, password });
+  return verifiedUser;
 };
 
-const getUserWithId = async (personId) => {
-  const user = await User.findById(personId, "-__v -password").catch((e) => {
-    return "Invalid Id";
-  });
+const getUserWithId = (personId) => {
+  const user = User.findById(personId, "-__v -password")
+    .exec()
+    .catch((e) => "Invalid Id");
   return user;
 };
 
 module.exports = {
   getUser,
-  createUser,
-  getVerifiedUser,
   getUserWithId,
+  getVerifiedUser,
+  createUser
 };

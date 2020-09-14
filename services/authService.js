@@ -1,4 +1,4 @@
-const authService = require("../models/authModel");
+const authModel = require("../models/userModel");
 
 //helper
 const getSignUpPayload = (authPayload) => {
@@ -10,18 +10,11 @@ const getSignUpPayload = (authPayload) => {
   return user;
 };
 
-//helper
-const getUser = async (personId) => {
-  const user = await authService.getUserWithId(personId);
-  if (!user) return "No User Available with the given id";
-  return user;
-};
-
 const signUp = async (authPayload) => {
-  const result = await authService.getUser(authPayload.mail);
-  if (result.length > 0) return "Email already registered";
+  const result = await authModel.getUser(authPayload.mail);
+  if (result) return "Email already registered";
   const user = getSignUpPayload(authPayload);
-  const newUser = await authService.createUser(user);
+  const newUser = await authModel.createUser(user);
   const payload = {
     name: newUser.userName,
     token: newUser._id,
@@ -30,7 +23,7 @@ const signUp = async (authPayload) => {
 };
 
 const login = async (authPayload) => {
-  const verifiedUser = await authService.getVerifiedUser(
+  const verifiedUser = await authModel.getVerifiedUser(
     authPayload.email,
     authPayload.password
   );
@@ -48,5 +41,4 @@ const login = async (authPayload) => {
 module.exports = {
   signUp,
   login,
-  getUser,
 };

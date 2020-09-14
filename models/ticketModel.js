@@ -1,5 +1,5 @@
 const { Ticket } = require("../schemas/ticketSchema");
-const { getUser } = require("../services/authService");
+const { getUserWithId } = require("../services/userService");
 
 const createRes = (id, flag) => {
   const updateStatus = {
@@ -10,7 +10,7 @@ const createRes = (id, flag) => {
 };
 
 const validatePersonId = async (personId) => {
-  const user = await getUser(personId);
+  const user = await getUserWithId(personId);
   if (user == "Invalid Id") return false;
   if (user == "No User Available with the given id") return false;
   return true;
@@ -50,7 +50,7 @@ const updateStatus = async (id, userId) => {
 };
 
 const getTicket = (id) => {
-  const ticket = Ticket.findOne({ ticketId: id });
+  const ticket = Ticket.findOne({ ticketId: id }, "-_id -__v");
   return ticket;
 };
 

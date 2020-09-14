@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const path = require("path");
-const ticketRouter = require("./routes/ticket");
+const ticketRouter = require("./routes/tickets");
 const authRouter = require("./routes/auth");
+const userRouter = require("./routes/users");
 require("dotenv").config();
 require("./utils/connection")();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/tickets", ticketRouter);
 app.use("/auth", authRouter);
+app.use("/users",userRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "bus-app/build")));
