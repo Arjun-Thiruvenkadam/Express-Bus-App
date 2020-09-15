@@ -1,0 +1,412 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bus API",
+    "description": "A Ticket Booking REST API with NodeJS",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/tickets": {
+      "get": {
+        "description": "Get all tickets",
+        "responses": {
+          "200": {
+            "description": "A list of tickets",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tickets"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets/{ids}": {
+      "get": {
+        "description": "Get ticket with id",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ticket",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ticket"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets/status/{stat}": {
+      "get": {
+        "description": "Get tickets with status",
+        "parameters": [
+          {
+            "name": "stat",
+            "in": "path",
+            "description": "Value can either be open or closed",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of tickets",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tickets"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets/{id}": {
+      "put": {
+        "description": "Get ticket with id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Ticket id from 1 to 40",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "value": "{\r\n    \"userId\":\"5f465cf7a8ecff62f072353e\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result",
+            "content": {
+              "text/html; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets/update": {
+      "put": {
+        "description": "Update array of tickets",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ticketId": {
+                      "type": "number"
+                    },
+                    "personId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "value": "[\r\n    {\"ticketId\":1,\"personId\":\"5f465cf7a8ecff62f072353e\"},\r\n    {\"ticketId\":2,\"personId\":\"5f465cf7a8ecff62f072353e\"}\r\n]"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketsUpdate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets/reset": {
+      "put": {
+        "description": "Reset all tickets",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"key\" : \"123\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result",
+            "content": {
+              "text/html; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "description": "Get user details",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Valid user id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "1": {
+                "value": "5f465cf7a8ecff62f072353e"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "description": "Sign up",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "mail": {
+                    "type": "string"
+                  },
+                  "userName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"userName\": \"Name\",\r\n    \"mail\": \"user@gmail.com\",\r\n    \"password\": \"password\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User token and name",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserToken"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "value": "{\r\n    \"email\":\"arjun123@gmail.com\",\r\n    \"password\":\"Arjun@123\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User token and name",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserToken"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserToken": {
+        "required": [
+          "name",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Tickets": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ticketId": {
+              "type": "number"
+            },
+            "status": {
+              "type": "string"
+            },
+            "personId": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TicketsUpdate": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ticketId": {
+              "type": "number"
+            },
+            "updated": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          }
+        }
+      },
+      "Ticket": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "personId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
   "description": "Bus Company API",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "start": "nodemon server.js",
     "heroku-postbuild": "cd bus-app && npm install --only=dev && npm install && npm run build"
   },
@@ -19,7 +19,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.27",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
