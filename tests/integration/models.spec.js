@@ -55,7 +55,7 @@ describe("Integration Test", () => {
       expect(result.n).toBe(0);
     });
 
-    it("should update match all tickets", async () => {
+    it("should match all tickets", async () => {
       const result = await Ticket.updateMany(
         {},
         { status: "open", personId: null }
