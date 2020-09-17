@@ -28,12 +28,12 @@
         }
       }
     },
-    "/tickets/{ids}": {
+    "/tickets/{ticketId}": {
       "get": {
-        "description": "Get ticket with id",
+        "description": "Get ticket with id : 1 - 40",
         "parameters": [
           {
-            "name": "ids",
+            "name": "ticketId",
             "in": "path",
             "required": true,
             "style": "simple",
@@ -373,8 +373,8 @@
             "ticketId": {
               "type": "number"
             },
-            "updated": {
-              "type": "boolean"
+            "result": {
+              "type": "string"
             }
           }
         }

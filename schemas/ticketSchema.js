@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const ticketSchema = new mongoose.Schema({
   ticketId: Number,
@@ -6,7 +6,7 @@ const ticketSchema = new mongoose.Schema({
   personId: String,
 });
 
-const Ticket = mongoose.model("Ticket", ticketSchema);
+const Ticket = mongoose.model('Ticket', ticketSchema);
 
 module.exports = {
   Ticket,

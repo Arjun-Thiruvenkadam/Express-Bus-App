@@ -1,4 +1,4 @@
-const { User } = require("../schemas/userSchema");
+const { User } = require('../schemas/userSchema');
 
 const getUser = (mail) => {
   const user = User.findOne({ mail });
@@ -16,9 +16,9 @@ const getVerifiedUser = (mail, password) => {
 };
 
 const getUserWithId = (personId) => {
-  const user = User.findById(personId, "-__v -password")
+  const user = User.findById(personId, '-__v -password')
     .exec()
-    .catch((e) => "Invalid Id");
+    .catch(() => 'Invalid Id');
   return user;
 };
 
@@ -26,5 +26,5 @@ module.exports = {
   getUser,
   getUserWithId,
   getVerifiedUser,
-  createUser
+  createUser,
 };

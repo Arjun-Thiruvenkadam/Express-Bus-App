@@ -1,8 +1,8 @@
-const userModel = require("../models/userModel.js");
+const userModel = require('../models/userModel.js');
 
 const getUserWithId = async (personId) => {
   const user = await userModel.getUserWithId(personId);
-  if (!user) return "No User Available with the given id";
+  if (!user) return 'No User Available with the given id';
   return user;
 };
 
@@ -25,5 +25,5 @@ module.exports = {
   getUserWithId,
   getVerifiedUser,
   getUser,
-  createUser
+  createUser,
 };

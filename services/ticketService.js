@@ -1,4 +1,4 @@
-const ticketModel = require("../models/ticketModel");
+const ticketModel = require('../models/ticketModel');
 
 const updateAll = async (selectedTickets) => {
   const result = await ticketModel.updateTickets(selectedTickets);
@@ -11,16 +11,14 @@ const getAll = async () => {
 };
 
 const updateStatus = async (id, userId) => {
-  if (!userId) return "User id not given";
-  if (id < 1 || id > 40)
-    return "There is no ticket with the given id";
+  if (!userId) return 'User id not given';
+  if (id < 1 || id > 40) return 'There is no ticket with the given id';
   const result = await ticketModel.updateStatus(id, userId);
   return result;
 };
 
 const getTicket = async (id) => {
-  if (id < 1 || id > 40)
-    return "There is no ticket with the given id";
+  if (id < 1 || id > 40) return 'There is no ticket with the given id';
   const ticket = await ticketModel.getTicket(id);
   return ticket;
 };
