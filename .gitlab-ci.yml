@@ -16,5 +16,5 @@ install_dependencies:
 testing:
   stage: test
   script: 
-    - npm lint
+    - npm run lint
     - npm test
