@@ -14,6 +14,10 @@
 
 - [DB_URL] - MongoDb URL hosted on Atlas
 
+## Demo
+
+  Visit https://express-bus-api.herokuapp.com/api for a live demo of the API.
+
 ## Endpoints
 
 |HTTP Method |Entity   |Endpoint   |Input   |Result Object   |
