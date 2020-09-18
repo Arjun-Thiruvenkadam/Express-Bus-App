@@ -2,6 +2,7 @@ image: node:latest
 stages:
   - build
   - test
+  - build
 cache:
   paths:
     - node_modules/
@@ -18,3 +19,10 @@ testing:
   script: 
     - npm run lint
     - npm test
+production:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=express-bus-api --api-key=$HEROKU_PRODUCTION_API_KEY
+  only:
+    - master

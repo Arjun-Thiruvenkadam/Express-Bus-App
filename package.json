@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest --forceExit",
     "start": "nodemon server.js",
-    "lint": "eslint --ignore-path .gitignore .",
-    "heroku-postbuild": "cd bus-app && npm install --only=dev && npm install && npm run build"
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "author": "Aju",
   "license": "ISC",
