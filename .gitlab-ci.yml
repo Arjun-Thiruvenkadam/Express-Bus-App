@@ -2,7 +2,7 @@ image: node:latest
 stages:
   - build
   - test
-  - build
+  - deploy
 cache:
   paths:
     - node_modules/
