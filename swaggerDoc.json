@@ -181,25 +181,6 @@
     "/tickets/reset": {
       "put": {
         "description": "Reset all tickets",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "key": {
-                    "type": "string"
-                  }
-                }
-              },
-              "examples": {
-                "0": {
-                  "value": "{\r\n    \"key\" : \"123\"\r\n}"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Result",
