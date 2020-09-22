@@ -38,16 +38,6 @@ describe('Integration Test', () => {
       expect(ticket).toBeNull();
     });
 
-    it('should update ticket based on id and status', async () => {
-      const ticketId = 1;
-      await Ticket.updateOne(
-        { ticketId, status: 'open' },
-        { status: 'closed', personId }
-      );
-      const ticket = await Ticket.findOne({ ticketId });
-      expect(ticket.status).toBe('closed');
-    });
-
     it('should not update ticket for invalid id', async () => {
       const ticketId = 56;
       const result = await Ticket.updateOne(
@@ -55,14 +45,6 @@ describe('Integration Test', () => {
         { status: 'closed', personId }
       );
       expect(result.n).toBe(0);
-    });
-
-    it('should match all tickets', async () => {
-      const result = await Ticket.updateMany(
-        {},
-        { status: 'open', personId: null }
-      );
-      expect(result.n).toBe(40);
     });
   });
 
@@ -75,7 +57,7 @@ describe('Integration Test', () => {
     });
 
     it('should get a null', async () => {
-      const user = await User.findOne({ mail: '__nomail__@gmail.com' });
+      const user = await User.findOne({ mail: '__nomail__@gmail' });
       expect(user).toBeNull();
     });
 

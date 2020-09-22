@@ -23,7 +23,7 @@
 |HTTP Method |Entity   |Endpoint   |Input   |Result Object   |
 |---|---|---|---|---|
 |Put   |/tickets|/update   |Body:<br>[<br>{<br> ticketId : integer ,<br> personId : string <br>},<br>{...},<br>..<br>]   |[<br>{<br> ticketId : integer ,<br> result : string<br> },<br>{...},<br>..<br>]   |
-|Put   ||/reset   |Body:<br>{<br>key : string <br>}   |result : string   |
+|Put   ||/reset   ||result : string   |
 |Put   ||/:id   |Param:<br>{ <br>userId : string<br> }   |result : string   |
 |Get   ||/   |   |<br>[<br>{<br> ticketId : integer ,<br> status : string ,<br> personId : string <br>},<br>{...},<br>..<br>]   |
 |Get   ||/:id   |   |{<br>ticketId : integer ,<br> status : string ,<br> personId : string<br>}   |
@@ -36,7 +36,7 @@
 
 ```bash
 # Install
-$ git clone https://gitlab.com/arjunthiru/rest-api.git
+$ git clone https://github.com/Arjun-Thiruvenkadam/Express-Bus-App.git
 
 $ cd <PROJECT_NAME>
 
