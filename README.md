@@ -16,21 +16,7 @@
 
 ## Demo
 
-  Visit https://express-bus-api.herokuapp.com/api for a live demo of the API.
-
-## Endpoints
-
-|HTTP Method |Entity   |Endpoint   |Input   |Result Object   |
-|---|---|---|---|---|
-|Put   |/tickets|/update   |Body:<br>[<br>{<br> ticketId : integer ,<br> personId : string <br>},<br>{...},<br>..<br>]   |[<br>{<br> ticketId : integer ,<br> result : string<br> },<br>{...},<br>..<br>]   |
-|Put   ||/reset   ||result : string   |
-|Put   ||/:id   |Param:<br>{ <br>userId : string<br> }   |result : string   |
-|Get   ||/   |   |<br>[<br>{<br> ticketId : integer ,<br> status : string ,<br> personId : string <br>},<br>{...},<br>..<br>]   |
-|Get   ||/:id   |   |{<br>ticketId : integer ,<br> status : string ,<br> personId : string<br>}   |
-|Get   ||/status/:stat   |   |<br>[<br>{<br> ticketId : integer ,<br> status : string ,<br> personId : string <br>},<br>{...},<br>..<br>]   |
-|Post   |/auth|/signup|Body:<br>{<br> userName : string ,<br> mail : string ,<br> password : string <br>}| {<br>name : string ,<br> token : string <br>}|
-|Post   ||/login|Body:<br>{<br> email : string ,<br> password : string <br>}|{<br>name : string ,<br> token : string <br>}|
-|Get   |/users|/:userId|   |{<br> userName : string ,<br> mail : string ,<br> _id : string <br>}  |
+  Visit https://express-bus-api.herokuapp.com/docs for a live demo of the API.
 
 ## Installation
 
